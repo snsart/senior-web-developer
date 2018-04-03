@@ -4,8 +4,8 @@ var p; // shortcut to reference prototypes
 
 // library properties:
 lib.properties = {
-	width: 1024,
-	height: 768,
+	width: 960,
+	height: 540,
 	fps: 24,
 	color: "#000033",
 	manifest: []
@@ -64,7 +64,7 @@ p.nominalBounds = new cjs.Rectangle(-16,-44,32,88.1);
 	this.shape.setTransform(34,13.5);
 
 	this.shape_1 = new cjs.Shape();
-	this.shape_1.graphics.f("#2290B1").s().rr(-30.6,-12,61.2,24,4.4);
+	this.shape_1.graphics.f("#333333").s().rr(-30.6,-12,61.2,24,4.4);
 	this.shape_1.setTransform(34.5,13.5,1.126,1.126);
 
 	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.shape_1},{t:this.shape}]}).wait(4));
@@ -141,16 +141,16 @@ p.nominalBounds = new cjs.Rectangle(-29.5,-40.9,62,85);
 
 	// 图层 1
 	this.cutBtn = new lib.jiandao();
-	this.cutBtn.setTransform(518,659);
+	this.cutBtn.setTransform(914.8,251.2,0.833,0.833);
 
 	this.updateBtn = new lib.刷新();
-	this.updateBtn.setTransform(902.1,677.1,1.291,1.292);
+	this.updateBtn.setTransform(435.5,505.1,1.291,1.292);
 	new cjs.ButtonHelper(this.updateBtn, 0, 1, 2, false, new lib.刷新(), 3);
 
 	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.updateBtn},{t:this.cutBtn}]}).wait(1));
 
 }).prototype = p = new cjs.MovieClip();
-p.nominalBounds = new cjs.Rectangle(1001,1002.6,502.2,93.5);
+p.nominalBounds = new cjs.Rectangle(915.5,487.5,506,322.5);
 
 })(lib = lib||{}, images = images||{}, createjs = createjs||{}, ss = ss||{});
 var lib, images, createjs, ss;

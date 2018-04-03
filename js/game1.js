@@ -121,8 +121,8 @@ function createInitShapes(){
 		}
 		initShapes.push(subArr);//根据此数组确定各图形之间的链接关系
 	}
-	shapesCont.x=200;
-	shapesCont.y=200;
+	shapesCont.x=250;
+	shapesCont.y=100;
 	shapesCont.linkPots=getLinkPot(shapesCont);
 	shapesCont.addDragAction(new createjs.Rectangle(0,0,1024,768),stage,false,false);
 	shapesCont.mouseupHandler=function(){
