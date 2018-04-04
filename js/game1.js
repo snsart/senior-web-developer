@@ -344,7 +344,7 @@ function getAllLinksShape(shape){
 	var checkShapes=[];
 	checkShapes.push(shape)
 	while(checkShapes.length>0){
-		var shape=checkShapes.pop();
+		var shape=checkShapes.shift();
 		if(shape.right!=null&&linkShapes.indexOf(shape.right)==-1&&checkShapes.indexOf(shape.right)==-1){
 			checkShapes.push(shape.right);
 		}
