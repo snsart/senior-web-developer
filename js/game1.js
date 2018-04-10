@@ -36,9 +36,7 @@ var canvas, stage, root;
 var rows=4,columns=9;
 var rectHeight=rectWidth=50;
 var shapeConts=[];
-var cutPath=[];
 var pathShape;
-var endPathShape;
 var cutState=false;
 var targetPos=[];
 
@@ -103,28 +101,28 @@ function setTargetPos(){
 }
 
 function createInitShapes(){
-	var initShapes=[];
+	var initShapes=[];//一个二维数组，存储图形中的小方块
 	var shapesCont=new createjs.MovieClip();
 	shapesCont.shapes=[];//存储图形形状
-	shapesCont.linkPots;//存储图形中各链接点坐标,相对于shapesContainer
-	shapesCont.cutPath=[];//存储图形中的切割路径，相对于shapesContainer
+	shapesCont.linkPots=[];//存储图形中各链接点坐标,相对于shapesCont
+	shapesCont.cutPath=[];//存储图形中的切割路径，相对于shapesCont
 	for(var row=0;row<rows;row++){
-		var subArr=[];
+		var rowArr=[];
 		for(var column=0;column<columns;column++){
 			var shape=new createjs.Shape();
-			shape.graphics.setStrokeStyle(2).beginStroke("#ffffff").beginFill("red").drawRect(0,0,rectWidth,rectHeight);
+			shape.graphics.setStrokeStyle(2).beginStroke("#ffffff").beginFill("red").drawRect(0,0,rectWidth,rectHeight);//画一个小方块
 			shape.x=rectWidth*column;
 			shape.y=rectHeight*row;
 			shapesCont.shapes.push(shape);
 			shapesCont.addChild(shape);
-			subArr.push(shape);
+			rowArr.push(shape);
 		}
-		initShapes.push(subArr);//根据此数组确定各图形之间的链接关系
+		initShapes.push(rowArr);
 	}
 	shapesCont.x=250;
 	shapesCont.y=100;
 	shapesCont.linkPots=getLinkPot(shapesCont);
-	shapesCont.addDragAction(new createjs.Rectangle(0,0,1024,768),stage,false,false);
+	shapesCont.addDragAction(new createjs.Rectangle(0,0,1024,768),stage,false,false);//这里为shapesCont图形添加拖动效果
 	shapesCont.mouseupHandler=function(){
 		this.goto(targetPos,25);
 	}
@@ -197,14 +195,7 @@ function addEvent(){
 				stopCut(shapeConts[i]);
 			}
 			if(cutfinished()){
-				cutState=false;
-				root.cutBtn.gotoAndStop(0);
-				clearCutPath();
-				for(var i=0;i<shapeConts.length;i++){
-					shapeConts[i].cutfinish=true;
-					shapeConts[i].cutPath=[];
-					shapeConts[i].dragable=true;
-				}
+				stopCutState();
 			}
 		}
 	});
@@ -216,6 +207,17 @@ function addEvent(){
 			}
 		}
 	});		
+}
+
+function stopCutState(){
+	cutState=false;
+	root.cutBtn.gotoAndStop(0);
+	clearCutPath();
+	for(var i=0;i<shapeConts.length;i++){
+		shapeConts[i].cutfinish=true;
+		shapeConts[i].cutPath=[];
+		shapeConts[i].dragable=true;
+	}
 }
 
 function addEventToBtn(){
@@ -249,13 +251,14 @@ function cutfinished(){
 	return false;
 }
 
-//开始不断切割
+//开始切割
 function cuting(shapeCont){
 	shapeCont.cutfinish=false;
 	//鼠标在图形上的位置
 	var mouse={x:stage.mouseX-shapeCont.x,y:stage.mouseY-shapeCont.y};
 	drawCutPath(shapeCont);
 	for(var i=0;i<shapeCont.linkPots.length;i++){
+		//根据鼠标离链接结点的距离，来判断加哪一个链接结点加入切割路径中
 		if(createjsExtend.getDistance(mouse,shapeCont.linkPots[i])<10){
 			if(shapeCont.cutPath.length==0){
 				arrayUtils.addSingleEleToArray(shapeCont.cutPath,shapeCont.linkPots[i]);
@@ -368,6 +371,7 @@ function getAllLinksShape(shape){
 //根据shapeCont中的切割路径，更新形状之间的链接状态，被切开的两块形状将不再链接
 function updateLinkState(shapeCont){
 	for(var i=0;i<shapeCont.cutPath.length-1;i++){
+		//获得每一小段切割路径两端的坐标
 		var startPos=shapeCont.cutPath[i];
 		var endPos=shapeCont.cutPath[i+1];
 		if(startPos.x==endPos.x&&Math.abs(Math.abs(startPos.y-endPos.y)-50)<15){
