@@ -9,7 +9,7 @@
 ### JS设计模式
 - 节流函数
 
-### css
+### 页面布局
 - 熟悉flex 资料-[阮一峰：Flex 布局教程](http://www.ruanyifeng.com/blog/2014/10/event-loop.html)
 - 盒模型
 - position定位
@@ -35,9 +35,9 @@
 ### react
 - diff算法
 - 组件生命周期
-- higer-order组件
 
-### vue
-### node.js
-### npm
-### webpack
+### 前端工程化
+- npm
+- webpack
+
+### 渲染机制
