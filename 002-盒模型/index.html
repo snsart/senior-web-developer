@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>loyOut</title>
+		<style media="screen">
+			html *{
+				padding: 0;
+				margin: 0;
+			}
+			.layout article div{
+				min-height: 100px;
+			}
+			.layout{
+				margin-top: 15px;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- 三列布局：高度已知，左右栏宽300像素，中间宽度自适应 -->
+		<section class="layout float">
+			<style>
+				.layout.float .left{
+					width: 300px;
+					float: left;
+
+					background-color: red;
+				}
+				.layout.float .right{
+					width: 300px;
+					float: right;
+					background-color: blue;
+				}
+				.layout.float .center{
+					background-color: yellow;
+				}
+			</style>
+			<article class="left-right-center">
+				<div class="left"></div>
+				<div class="right"></div>
+				<div class="center">
+					<h1>浮动解决方案</h1>
+					1. 这是三栏布局的中间
+					2. 这是三栏布局的中间
+				</div>
+			</article>
+		</section>
+
+		<section class="layout absolute">
+			<style>
+				.layout.absolute .left{
+					position: absolute;
+					width: 300px;
+					left: 0;
+					background-color: red;
+				}
+				.layout.absolute .right{
+					position:absolute;
+					width: 300px;
+					right: 0;
+					background-color: blue;
+				}
+				.layout.absolute .center{
+					position:absolute;
+					left: 300px;
+					right: 300px;
+					background-color: yellow;
+				}
+			</style>
+			
+			<article class="left-right-center">
+				<div class="left"></div>
+				<div class="center">
+					<h1>绝对定位解决方案</h1>
+					1. 这是三栏布局的中间
+					2. 这是三栏布局的中间
+					3. 这是三栏布局的中间
+				</div>
+				<div class="right"></div>
+			</article>
+
+		</section>
+
+		<section class="layout flex-box">
+			<style>
+				.layout.flex-box{
+					margin-top: 130px;
+				}
+				.layout.flex-box .left-right-center{
+					display:flex;
+				}
+				.layout.flex-box .left{
+					width: 300px;
+					background-color: red;
+				}
+				.layout.flex-box .center{
+					flex: 1;
+					background-color: yellow;
+				}
+				.layout.flex-box .right{
+					width: 300px;
+					background-color: blue;
+				}
+			</style>
+
+			<article class="left-right-center">
+				<div class="left"></div>
+				<div class="center">
+					<h1>flex-box解决方案</h1>
+					1. 这是flex-box的中间
+				</div>
+				<div class="right"></div>
+			</article>
+		</section>
+
+		<section class="layout table">
+				<style>
+					.layout.table .left-right-center{
+						display: table;
+						width: 100%;
+						height: 100px;
+					}
+					.layout.table .left-right-center>div{
+						display:table-cell;
+					}
+					.layout.table .left{
+						width: 300px;
+						background-color: red;
+					}
+					.layout.table .right{
+						width: 300px;
+						background-color: blue;
+					}
+					.layout.table .center{
+						background-color: yellow;
+					}
+				</style>
+	
+				<article class="left-right-center">
+					<div class="left"></div>
+					<div class="center">
+						<h1>table解决方案</h1>
+						1. 这是table布局的中间
+					</div>
+					<div class="right"></div>
+				</article>
+			</section>
+
+	</body>
+</html>
