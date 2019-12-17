@@ -12,7 +12,6 @@ function myPromise(callback){
 myPromise.prototype={
     then:function(func1,func2){
         this.callbacks.push(func1,func2);
-        console.log(this.callbacks)
     }
 }
 
